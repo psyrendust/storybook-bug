@@ -1,0 +1,69 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Labs/About the lab" />
+
+# About the lab
+
+This folder hosts the incubator components that are not yet ready to move to the
+main `components` folder. The components in this folder are not guaranteed to be
+stable or to have a stable API. They are subject to change without notice.
+
+As we use and test these components we will learn more about the shortcomings of
+the components: missing features, API design, HI feedback, etc.
+
+For a component to e ready to move to the main `components` folder, the
+following are considered:
+
+- It needs to be used. A lab component with low usage eitehr means that it isn't
+  fully working yet, or that there is low demand for it.
+- It needs to match the code quality of the main `components`. It doesn't have
+  to be perfect, but it should be reliable enough that we can depend on it.
+  - Each component needs type definitions.
+  - Each type definition should be properly documented with JSDoc comments.
+  - Requires good test coverage.
+  - Requires a Storybook story for each component.
+- It needs to be stable. The API should be stable enough that we can depend on
+  it not changing in a breaking way.
+- It needs HI feedback. The component should be reviewed by the HI team to make
+  sure it meets the design requirements.
+
+## Usage
+
+To use a lab component, import it from the `@shared-components`. These components
+are prefixed with `UNSTABLE_` to indicate that they are not yet stable.
+
+```tsx
+import { UNSTABLE_LabComponent } from "@shared-components";
+```
+
+## Development
+
+To develop a lab component, create a new component in the `src/labs` directory.
+This component and props interface should be prefixed with `UNSTABLE_` to
+indicate that it is not yet stable.
+
+```tsx
+export interface UNSTABLE_LabComponentProps {
+  // Props go here
+}
+
+export const UNSTABLE_LabComponent = ({}: UNSTABLE_LabComponentProps) => {
+  return <div>Lab Component</div>;
+};
+```
+
+To add a story for the lab component, create a new story file in the `src/labs`
+directory. This file should be named `LabComponent.stories.tsx`. The story title
+should be prefixed with the `Labs` path followed by the component name.
+
+```tsx
+import React from "react";
+import { UNSTABLE_LabComponent } from "./LabComponent";
+
+export default {
+  title: "Labs/UNSTABLE_LabComponent",
+  component: UNSTABLE_LabComponent,
+};
+
+export const Default = () => <UNSTABLE_LabComponent />;
+```
